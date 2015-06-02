@@ -71,7 +71,7 @@ public class ATHandler extends AATHandler
 		this.terminators[6] = "\\+CPIN:\\s*SIM\\s*BUSY\\s";
 		this.terminators[7] = "\\+CPIN:\\s*SIM\\s*PIN\\s";
 		this.terminators[8] = "\\+CPIN:\\s*SIM\\s*PIN2\\s";
-		this.terminators[9] = "\\+CUSD:\\s.*\\s";
+		this.terminators[9] = "\\+CUSD\\:\\s?\\d+\\,\\\".*[\\s].*\\\"\\,\\d+\\s";
 		this.terminators[10] = "\\+CMTI:\\s*\\p{Punct}[\\p{ASCII}]+\\p{Punct}\\p{Punct}\\s*\\d+\\s";
 		this.terminators[11] = "\\+CDSI:\\s*\\p{Punct}[\\p{ASCII}]+\\p{Punct}\\p{Punct}\\s*\\d+\\s";
 		this.terminators[12] = "RING\\s";
@@ -569,7 +569,7 @@ public class ATHandler extends AATHandler
 			getModemDriver().clearBuffer();
 		}
 		String response;
-		String regex = "\"(.*)\"";
+		String regex = "\\\"(.*[\\s].*)\\\"";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(ussdResponse);
 		if (matcher.find())
